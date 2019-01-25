@@ -29,7 +29,7 @@ import os
 # try: curl -v -X GET http://127.0.0.1:8080/
 
 #reference: split by space : https://blog.csdn.net/hawkerou/article/details/53518154
-#https://stackoverflow.com/questions/4690600/python-exception-message-capturing
+#           https://stackoverflow.com/questions/4690600/python-exception-message-capturing
 
 class MyWebServer(socketserver.BaseRequestHandler):
     
@@ -38,7 +38,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         print ("Got a request of: %s\n" % self.data)
         #self.request.sendall(bytearray("OK",'utf-8'))
         data = self.data.decode()
-
+        #split the data by space 
         data_list = re.split(r' ',data)
         #print ("data_list : ", data_list)
 
@@ -48,6 +48,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
             path = data_list[1]
             path = 'www' + path
             #print(path)
+            #ignore the favicon request
             if path == "www/favicon.ico":
                 return
 
@@ -61,6 +62,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
                 #print("relative_path:",relative_path)
                 #print("realpath:", real_path)
 
+                #check if the file is out of the "www" file
                 if relative_path in real_path:
                     self.request.sendall(bytearray("HTTP/1.1 200 OK\r\n",'utf-8'))
                     if content_type[0] != None:
