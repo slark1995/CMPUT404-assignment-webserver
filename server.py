@@ -45,8 +45,8 @@ class MyWebServer(socketserver.BaseRequestHandler):
         request_method = data_list[0]
 
         if request_method == "GET":
-            path = data_list[1]
-            path = 'www' + path
+            ori_path = data_list[1]
+            path = 'www' + ori_path
             #print(path)
             #ignore the favicon request
             if path == "www/favicon.ico":
@@ -98,10 +98,12 @@ class MyWebServer(socketserver.BaseRequestHandler):
 
 
                 else:
-                    #print("301 move per...")
+                    print("301 move per...")
                     #print("e is :", str(e))
                     #print("type of e:",type(e))
                     self.request.sendall(bytearray("HTTP/1.1 301 Moved Permanently\r\n",'utf-8'))
+                    new_path = ori_path + "/"
+                    self.request.sendall(bytearray("Location:" + new_path + "\r\n",'utf-8'))
                     self.request.sendall(bytearray("text/html\r\n",'utf-8'))
                     self.request.sendall(bytearray("Connection: keep-alive\r\n\r\n",'utf-8'))
                     return
