@@ -23,3 +23,6 @@ examples thus some of the code is Copyright © 2001-2013 Python
 Software Foundation; All Rights Reserved under the PSF license (GPL
 compatible) http://docs.python.org/2/library/socketserver.html
 
+Collaboration: Yuqi Zhang told me how to get the real file path (use os.path.abspath())
+reference: Split by space : https://blog.csdn.net/hawkerou/article/details/53518154
+           Handle exception message: https://stackoverflow.com/questions/4690600/python-exception-message-capturing
